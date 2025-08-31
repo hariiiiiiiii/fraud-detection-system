@@ -1,0 +1,27 @@
+# Core data science
+pandas
+numpy
+scikit-learn
+xgboost
+
+# Web framework
+fastapi
+uvicorn
+pydantic
+
+# Database
+psycopg2-binary
+sqlalchemy
+
+# Caching
+redis
+
+# Utilities
+python-dotenv
+structlog
+joblib
+tqdm
+
+# Development
+pytest
+jupyter
