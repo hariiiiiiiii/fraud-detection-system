@@ -48,7 +48,7 @@ IEEE CIS Dataset → Kafka Producer → Kafka Topics → ML Consumer → Redis C
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/fraud-detection-pipeline.git
+git clone https://github.com/hariiiiiiiii//fraud-detection-pipeline.git
 cd fraud-detection-pipeline
 ```
 
@@ -229,7 +229,6 @@ fraud-detection-pipeline/
 - **Single Node**: Current setup runs on single machine (not distributed)
 - **Model Staleness**: No automatic model retraining pipeline
 - **Limited Security**: Basic setup without production security measures
-- **Data Volume**: Scaled down for demo purposes
 
 ## 🤝 Contributing
 
