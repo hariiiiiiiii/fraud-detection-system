@@ -97,7 +97,6 @@ Using the [IEEE-CIS Fraud Detection Dataset](https://www.kaggle.com/c/ieee-fraud
 - **Training Set**: ~590K transactions
 - **Features**: 434 features including transaction amount, product code, card info, etc.
 - **Target**: Binary fraud classification
-- **Note**: Dataset scaled down for demo purposes
 
 ## 🔧 Configuration
 
