@@ -1,27 +1,10 @@
-# Core data science
+xgboost
+kafka-python
+psycopg2-binary
+redis
 pandas
 numpy
 scikit-learn
-xgboost
-
-# Web framework
-fastapi
-uvicorn
-pydantic
-
-# Database
-psycopg2-binary
-sqlalchemy
-
-# Caching
-redis
-
-# Utilities
-python-dotenv
-structlog
 joblib
-tqdm
-
-# Development
-pytest
-jupyter
+prometheus-client
+python-snappy

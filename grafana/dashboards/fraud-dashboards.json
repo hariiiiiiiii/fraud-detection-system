@@ -1,0 +1,78 @@
+{
+  "id": null,
+  "title": "IEEE Fraud Detection Dashboard - Real-Time",
+  "tags": ["fraud", "ieee", "cis", "real-time"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Real-time Fraud Rate (%)",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": "PostgreSQL",
+          "format": "table",
+          "rawSql": "SELECT COALESCE((SUM(CASE WHEN is_fraud_predicted THEN 1 ELSE 0 END)::decimal / NULLIF(COUNT(*),0)) * 100, 0) AS fraud_rate FROM ieee_predictions WHERE created_at >= NOW() - INTERVAL '1 hour'"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Transactions Per Hour",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": "PostgreSQL",
+          "format": "table",
+          "rawSql": "SELECT COUNT(*) AS transactions FROM ieee_predictions WHERE created_at >= NOW() - INTERVAL '1 hour'"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "Average Processing Time (ms)",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": "PostgreSQL",
+          "format": "table",
+          "rawSql": "SELECT ROUND(AVG(processing_time_ms)::numeric, 2) AS avg_time FROM ieee_predictions WHERE created_at >= NOW() - INTERVAL '1 hour'"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 }
+    },
+    {
+      "id": 4,
+      "title": "High-Risk Transactions (fraud_probability > 0.5)",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": "PostgreSQL",
+          "format": "table",
+          "rawSql": "SELECT COUNT(*) AS high_risk FROM ieee_predictions WHERE fraud_probability > 0.5 AND created_at >= NOW() - INTERVAL '1 hour'"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
+    },
+    {
+      "id": 5,
+      "title": "Fraud Detection Over Time (Last 1h, 5-min interval)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": "PostgreSQL",
+          "format": "time_series",
+          "rawSql": "SELECT gs.min AS time, COALESCE(COUNT(p.id),0) AS total_transactions, COALESCE(SUM(CASE WHEN p.is_fraud_predicted THEN 1 ELSE 0 END),0) AS fraud_transactions FROM generate_series(date_trunc('minute', NOW() - INTERVAL '1 hour'), date_trunc('minute', NOW()), '5 minutes') AS gs(min) LEFT JOIN ieee_predictions p ON p.created_at >= gs.min AND p.created_at < gs.min + INTERVAL '5 minutes' GROUP BY gs.min ORDER BY gs.min;"
+        }
+      ],
+      "gridPos": { "h": 12, "w": 24, "x": 0, "y": 16 }
+    }
+  ],
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "10s",
+  "schemaVersion": 37,
+  "version": 1,
+  "links": []
+}
