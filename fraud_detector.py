@@ -42,7 +42,6 @@ class IEEEFraudDetectionService:
         self.kafka_consumer = None
         self.kafka_producer = None
         self.fraud_threshold = 0.5  
-        s
         self.categorical_features = [
             'ProductCD', 'card1', 'card2', 'card3', 'card4', 'card5', 'card6',
             'addr1', 'addr2', 'P_emaildomain', 'R_emaildomain', 'DeviceType',

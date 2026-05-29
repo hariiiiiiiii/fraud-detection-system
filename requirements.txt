@@ -8,3 +8,4 @@ scikit-learn
 joblib
 prometheus-client
 python-snappy
+lz4
